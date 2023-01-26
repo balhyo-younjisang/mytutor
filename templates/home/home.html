@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="content_wrap">
+       <h1>나와 딱 맞는<br> 과외 선생님을 찾아드려요</h1>
+        {% if not user.is_authenticated %}
+            <h3>마이튜터가 처음이신가요?</h3>
+            <div class="btn_wrap">
+                <button onclick="location.href ='common/signup'">회원가입</button>
+                <button onclick="location.href ='common/login'">로그인</button>
+            </div>
+        {% else %}
+            <form>
+                <input type="text">
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

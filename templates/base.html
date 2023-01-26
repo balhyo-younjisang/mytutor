@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>과외를 시작할 땐? 마이튜터</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block static %}
+    {% endblock %}
+</head>
+<body>
+    <header class="header">
+        <section class="header_sc">
+            <a aria-label="logo" href="/" class="site_logo">
+                <img src="/static/imgs/Logo.svg" alt="MyTutor Logo" width="100" height="100">
+            </a>
+            <div></div>
+            <div style="flex-grow: 1"></div>
+            <form role="search" class="search_form">
+                {% csrf_token %}
+                <div class="input_div">
+                    <input type="text" placeholder="검색어를 입력하세요" maxlength="30" autocomplete="off" autocapitalize="off"
+                           class="search_input">
+                    <div class="suffix-wrapper">
+                        <span role="img" class="icon_span">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><path xmlns="http://www.w3.org/2000/svg" d="M11.2307008,3.5 C15.5002489,3.5 18.9614015,6.96828437 18.9614015,11.24663 C18.9614015,13.0978372 18.3133954,14.7973826 17.2322825,16.1299241 L20.2742127,19.178378 C20.5762688,19.4810023 20.5764739,19.9714482 20.2746708,20.2738195 C19.9728678,20.5761908 19.4833433,20.5759857 19.1812873,20.2733614 L19.1812873,20.2733614 L16.1426973,17.2288066 C14.8071694,18.3312107 13.0960911,18.9932599 11.2307008,18.9932599 C6.96115262,18.9932599 3.5,15.5249756 3.5,11.24663 C3.5,6.96828437 6.96115262,3.5 11.2307008,3.5 Z M11.2307008,5.04932599 C7.81506225,5.04932599 5.04614015,7.82395349 5.04614015,11.24663 C5.04614015,14.6693064 7.81506225,17.4439339 11.2307008,17.4439339 C14.6463393,17.4439339 17.4152614,14.6693064 17.4152614,11.24663 C17.4152614,7.82395349 14.6463393,5.04932599 11.2307008,5.04932599 Z"></path></svg>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+            {% if user.is_authenticated %}
+               <!--만약 로그인 되어 있다면 렌더링-->
+                <div class="sub_menu1">
+                    <a role="link" class="submenu_a_message" href="/message">메시지</a>
+                    <a role="link" class="submenu_a_profile" href="common/profile/{{user.username}}">{{user.username}} 프로필</a>
+                    <a role="link" class="submenu_a_logout" href="{% url 'common:logout' %}">로그아웃</a>
+                </div>
+            {% else %}
+                <!-- 만약 로그인 되어 있지 않다면 렌더링 -->
+                <div class="sub_menu2">
+                    <a role="link" href="{% url 'common:login' %}" class="submenu_a_login">로그인</a>
+                    <a role="link" href="{% url 'common:signup' %}" class="submenu_a_signup">회원가입</a>
+                </div>
+            {% endif %}
+        </section>
+    </header>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

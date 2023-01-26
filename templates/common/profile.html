@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{user.username}}의 프로필</h1>
+
+    {% if user.rating %}
+        <h3>평점 : {{user.rating}} / 5</h3>
+    {% else %}
+        <h3>평가가 없습니다</h3>
+    {% endif %}
+    <h3>이메일 : {{user.email}}</h3>
+    {% if user.gender == 'male'%}
+        <h3>성별 : 남성</h3>
+    {% else %}
+        <h3>성별 : 여성</h3>
+    {% endif %}
+    {% csrf_token %}
+{% endblock %}
